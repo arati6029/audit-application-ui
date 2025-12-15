@@ -1,0 +1,58 @@
+<div class="page-header">
+  <h1>Question Answers</h1>
+</div>
+
+<div style="margin-top: 50px">
+  <nz-table
+    [nzData]="questionAnswers"
+    [nzBordered]="true"
+    nzSize="middle"
+    width="100%"
+  >
+    <thead>
+      <tr>
+        <th style="width: 60px">Sr No</th>
+        <th>Question</th>
+        <th>Answer</th>
+        <th style="width: 120px">Status</th>
+        <th style="width: 120px; text-align: center">Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let ans of questionAnswers; let i = index">
+        <td>{{ i + 1 }}</td>
+
+        <!-- Question text -->
+        <td>{{ ans.questionText }}</td>
+
+        <!-- Editable Answer input -->
+        <td>
+          <input
+            nz-input
+            [(ngModel)]="ans.answerText"
+            name="answer_{{ i }}"
+            placeholder="Enter answer"
+            [disabled]="ans.status === 'ACCEPTED'"
+          />
+        </td>
+
+        <td>{{ ans.status }}</td>
+
+        <!-- Submit button -->
+        <td style="text-align: center">
+          <button
+            nz-button
+            nzType="primary"
+            nzSize="small"
+            nzShape="round"
+            (click)="submitAnswer(ans)"
+            [disabled]="ans.status === 'ACCEPTED'"
+          >
+            Submit
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

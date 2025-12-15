@@ -1,0 +1,85 @@
+<div class="page-container" style="max-width: 500px; margin: 40px auto">
+  <nz-card nzTitle="User Form" nzBordered="true">
+    <form nz-form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <!-- Name -->
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">
+          Name
+        </nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="24">
+          <input
+            nz-input
+            formControlName="name"
+            id="name"
+            placeholder="Enter full name"
+          />
+        </nz-form-control>
+      </nz-form-item>
+
+      <!-- Email -->
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">
+          Email
+        </nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="24">
+          <input
+            nz-input
+            formControlName="email"
+            id="email"
+            placeholder="Enter email address"
+          />
+        </nz-form-control>
+      </nz-form-item>
+
+      <!-- Password -->
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="passwordHash">
+          Password
+        </nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="24">
+          <input
+            nz-input
+            type="password"
+            formControlName="passwordHash"
+            id="passwordHash"
+            placeholder="Enter password"
+          />
+        </nz-form-control>
+      </nz-form-item>
+
+      <!-- Role -->
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="role">
+          Role
+        </nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="24">
+          <nz-select formControlName="role" nzPlaceHolder="Select role">
+            <nz-option nzValue="ADMIN" nzLabel="Admin"></nz-option>
+            <nz-option nzValue="AUDITOR" nzLabel="Auditor"></nz-option>
+            <!-- <nz-option nzValue="USER" nzLabel="User"></nz-option> -->
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+
+      <!-- Buttons -->
+      <div style="text-align: right; margin-top: 16px">
+        <button
+          nz-button
+          nzType="default"
+          style="margin-right: 8px"
+          (click)="onCancel()"
+        >
+          Cancel
+        </button>
+        <button
+          nz-button
+          nzType="primary"
+          [disabled]="userForm.invalid"
+          nzShape="round"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </nz-card>
+</div>

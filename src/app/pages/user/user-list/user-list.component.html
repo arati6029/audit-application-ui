@@ -1,0 +1,59 @@
+<div>
+  <div
+    class="action-bar"
+    style="
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    "
+  >
+    <h3 style="margin: 0">Registered Users</h3>
+    <div>
+      <button
+        nz-button
+        nzType="primary"
+        nzShape="round"
+        routerLink="/users/register"
+      >
+        <span nz-icon nzType="plus"></span>
+        Add New
+      </button>
+      <button
+        nz-button
+        nzType="default"
+        nzShape="round"
+        style="margin-left: 8px"
+        routerLink="/login"
+      >
+        <span nz-icon nzType="login"></span>
+        Login
+      </button>
+    </div>
+  </div>
+
+  <nz-table
+    #userTable
+    [nzData]="users"
+    [nzBordered]="true"
+    nzSize="middle"
+    [nzLoading]="loading"
+  >
+    <thead>
+      <tr>
+        <th nzWidth="60px">#</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of userTable.data; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

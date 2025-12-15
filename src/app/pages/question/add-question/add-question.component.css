@@ -1,0 +1,65 @@
+/* Container centers the form on the page */
+.form-container {
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 40px 30px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings inside the form (if added later) */
+.form-container h2 {
+  text-align: center;
+  color: #1890ff;
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+/* Adjust spacing between form items */
+nz-form-item {
+  margin-bottom: 20px;
+}
+
+/* Input fields styling */
+input[nz-input] {
+  height: 38px;
+  font-size: 14px;
+}
+
+/* Button group aligned to the right */
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Primary button styling */
+button[nzType="primary"] {
+  background-color: #1890ff;
+  border-color: #1890ff;
+}
+
+/* Primary hover effect */
+button[nzType="primary"]:hover {
+  background-color: #40a9ff;
+  border-color: #40a9ff;
+}
+
+/* Cancel button hover effect */
+button[nzType="default"]:hover {
+  color: #ffffff;
+  border-color: #1890ff;
+}
+
+/* For mobile responsiveness */
+@media (max-width: 576px) {
+  .form-container {
+    padding: 20px 15px;
+  }
+  .button-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

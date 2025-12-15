@@ -1,0 +1,72 @@
+<div class="page-header">
+  <h1>Question List</h1>
+</div>
+<div style="padding: 20px">
+  <div
+    style="
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    "
+  >
+    <!-- <h3>Question List</h3> -->
+    <div style="margin-left: auto">
+      <button nz-button nzType="primary" (click)="addQuestion()">
+        <span nz-icon nzType="plus"></span>
+        Add Question
+      </button>
+    </div>
+  </div>
+
+  <nz-table #basicTable [nzData]="questions" nzBordered>
+    <thead>
+      <tr>
+        <th>Sr No</th>
+        <th>Question Text</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let q of questions; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ q.questionText }}</td>
+        <td>
+          <button nz-button nzType="default" (click)="openAssignModal(q)">
+            Assign to Auditor
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <!-- Assign to Auditor Modal -->
+  <nz-modal
+    [(nzVisible)]="isAssignModalVisible"
+    nzTitle="Assign Question to Auditor"
+    (nzOnCancel)="handleCancel()"
+    (nzOnOk)="handleAssignSave()"
+    [nzOkText]="'Save'"
+    nzWidth="800px"
+  >
+    <ng-container *nzModalContent>
+      <form [formGroup]="assignForm">
+        <div>
+          <label for="auditorSelect">Select Auditor:</label>
+          <nz-select
+            id="auditorSelect"
+            style="width: 100%; margin-top: 8px"
+            nzPlaceHolder="Select Auditor"
+            formControlName="auditor"
+            [nzDropdownStyle]="{ 'z-index': '10000' }"
+          >
+            <nz-option
+              *ngFor="let user of auditors"
+              [nzLabel]="user.name"
+              [nzValue]="user.userId"
+            ></nz-option>
+          </nz-select>
+        </div>
+      </form>
+    </ng-container>
+  </nz-modal>
+</div>

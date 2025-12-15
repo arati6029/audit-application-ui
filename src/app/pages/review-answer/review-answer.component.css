@@ -1,0 +1,14 @@
+.review-answers-container {
+  padding: 20px;
+}
+
+.no-data {
+  text-align: center;
+  margin-top: 20px;
+  color: #999;
+  font-style: italic;
+}
+.page-header h1 {
+  font-weight: 500; /* or 700 */
+  text-align: left;
+}

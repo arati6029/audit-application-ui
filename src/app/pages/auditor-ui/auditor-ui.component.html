@@ -1,0 +1,22 @@
+<nz-layout class="welcome-layout">
+  <!-- <nz-header class="header">
+    <div class="header-content">
+      <h2 class="app-title">Dashboard</h2>
+      <div class="header-right">
+        <button nz-button nzType="default" (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </nz-header> -->
+
+  <nz-content class="content">
+    <div class="welcome-container">
+      <nz-card nzBordered="true" class="welcome-card">
+        <h1 class="welcome-title">
+          Welcome {{ userName }} ({{ role | titlecase }})
+        </h1>
+
+        <p class="message">You are successfully logged in to the system.</p>
+      </nz-card>
+    </div>
+  </nz-content>
+</nz-layout>
