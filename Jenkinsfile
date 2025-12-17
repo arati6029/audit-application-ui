@@ -12,34 +12,12 @@ pipeline {
         stage('Setup') {
             steps {
                 script {
-                    // Install required Node.js version using nvm
-                    if (isUnix()) {
-                        sh 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash'
-                        sh 'export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \\. "$NVM_DIR/nvm.sh" && nvm install $NODE_VERSION'
-                        sh 'export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \\. "$NVM_DIR/nvm.sh" && nvm use $NODE_VERSION'
-                    } else {
-                        // For Windows
-                        bat 'nvm install %NODE_VERSION%'
-                        bat 'nvm use %NODE_VERSION%'
-                    }
-                    
-                    // Install Angular CLI globally
-                    if (isUnix()) {
-                        sh 'npm install -g @angular/cli@$NG_CLI_VERSION'
-                    } else {
-                        bat 'npm install -g @angular/cli@%NG_CLI_VERSION%'
-                    }
-                    
-                    // Install project dependencies
-                    if (isUnix()) {
-                        sh 'npm ci'
-                    } else {
-                        bat 'npm ci'
-                    }
-                }
-            }
+                    // Jenkins will automatically set up Node.js
+                     sh 'node --version'
+                     sh 'npm --version'
         }
-
+    }
+}
         stage('Lint') {
             steps {
                 script {
