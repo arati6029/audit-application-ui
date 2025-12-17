@@ -76,13 +76,16 @@ pipeline {
             steps {
                 script {
                     // Clean previous build
-                    sh 'rm -rf dist/* || true'
-                    
-                    # Build Angular app
-                    sh 'ng build --configuration=production'
-                    
-                    # Verify build output
-                    sh 'ls -la dist/'
+                    sh '''
+                # Clean previous build
+                rm -rf dist/* || true
+                
+                # Build Angular app
+                ng build --configuration=production
+                
+                # Verify build output
+                ls -la dist/
+            '''
                 }
             }
         }
