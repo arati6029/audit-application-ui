@@ -11,6 +11,16 @@ pipeline {
     }
 
     stages {
+        stage('Check Branch') {
+            steps {
+                script {
+                    echo "Current branch: ${env.BRANCH_NAME}"
+                    echo "Git branch: ${GIT_BRANCH}"
+                    // If you need to get branch from git
+                    sh 'git branch --show-current'
+                }
+            }
+        }
         stage('Setup') {
             steps {
                 script {
