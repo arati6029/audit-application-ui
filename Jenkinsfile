@@ -11,13 +11,13 @@ pipeline {
     }
 
     stages {
-        stage('Check Branch') {
+        stage('Checkout') {
             steps {
+                checkout scm
                 script {
-                    echo "Current branch: ${env.BRANCH_NAME}"
-                    echo "Git branch: ${GIT_BRANCH}"
-                    // If you need to get branch from git
-                    sh 'git branch --show-current'
+                    // Get the branch name correctly
+                    env.GIT_BRANCH = env.GIT_BRANCH ?: sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
+                    echo "Building branch: ${env.GIT_BRANCH}"
                 }
             }
         }
@@ -129,7 +129,10 @@ pipeline {
 
         stage('Docker Build') {
             when {
-                branch 'origin/master'
+                anyOf {
+                    branch 'master'
+                    branch 'main'
+                }
             }
             steps {
                 script {
@@ -148,7 +151,10 @@ pipeline {
         
         stage('Deploy') {
             when {
-                branch 'origin/master'
+                anyOf {
+                    branch 'master'
+                    branch 'main'
+                }
             }
             steps {
                 script {
