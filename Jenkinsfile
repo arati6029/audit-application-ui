@@ -128,21 +128,23 @@ pipeline {
         }
 
         stage('Docker Build') {
-            
-            steps {
-                script {
-                    sh '''
-                        # Build Docker images
-                        echo "Building Docker images..."
-                        docker build -t ${DOCKER_USER}/${IMAGE_NAME}:${BUILD_NUMBER} .
-                        docker tag ${DOCKER_USER}/${IMAGE_NAME}:${BUILD_NUMBER} ${DOCKER_USER}/${IMAGE_NAME}:latest
-                        
-                        echo "Docker images created:"
-                        docker images | grep ${IMAGE_NAME}
-                    '''
-                }
+    steps {
+        script {
+            // Add these environment variables for Windows compatibility
+            withEnv(["DOCKER_BUILDKIT=0", "COMPOSE_DOCKER_CLI_BUILD=0"]) {
+                sh '''
+                    # Build Docker images with explicit platform
+                    echo "Building Docker images..."
+                    docker build --platform linux/amd64 -t ${DOCKER_USER}/${IMAGE_NAME}:${BUILD_NUMBER} .
+                    docker tag ${DOCKER_USER}/${IMAGE_NAME}:${BUILD_NUMBER} ${DOCKER_USER}/${IMAGE_NAME}:latest
+                    
+                    echo "Docker images created:"
+                    docker images | findstr "${IMAGE_NAME}"
+                '''
             }
         }
+    }
+}
         
         stage('Deploy') {
            
