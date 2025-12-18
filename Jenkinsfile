@@ -128,12 +128,7 @@ pipeline {
         }
 
         stage('Docker Build') {
-            when {
-                anyOf {
-                    branch 'master'
-                    branch 'main'
-                }
-            }
+            
             steps {
                 script {
                     sh '''
@@ -150,12 +145,7 @@ pipeline {
         }
         
         stage('Deploy') {
-            when {
-                anyOf {
-                    branch 'master'
-                    branch 'main'
-                }
-            }
+           
             steps {
                 script {
                     sh '''
